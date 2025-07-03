@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './tables.css'
+import booksConfig from '../config/booksConfig'
+import ReactPaginate from 'react-paginate'
 
-const BooksList = () => {
-  const books = [
-    { "id":1, "title": "The Lord of the Rings", "author": "J.R.R. Tolkien" },
-    { "id":2, "title": "To Kill a Mockingbird", "author": "Harper Lee" },
-    { "id":3, "title": "1984", "author": "George Orwell" },
-    { "id":4, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald" },
-    { "id":5, "title": "Pride and Prejudice", "author": "Jane Austen" }
-  ];
+const BooksList = ({books}) => {
+
+  const[curPage, setCurPage] = useState (0);
+
+  const handlePageClick = (selectedPage) => {
+    setCurPage(selectedPage.selected)
+  }
+
+  const itemsPerPage = booksConfig.booksPerPage;
+  const start = curPage * itemsPerPage;
+  const curBooks = books.slice(start, start + itemsPerPage);
+  const pageCount = Math.ceil (books.length/itemsPerPage);
+
 
   return (
     <div>
@@ -18,7 +25,7 @@ const BooksList = () => {
           <th> Book Name </th>
           <th> Author </th>
         </tr>
-        {books.map(book => (
+        {curBooks.map(book => (
           <tr key = {book.id}>
             <td> {book.id} </td>
             <td> {book.title} </td>
@@ -26,6 +33,26 @@ const BooksList = () => {
           </tr>
         ))}
       </table>
+
+      <ReactPaginate
+        previousLabel={"previous"}
+        nextLabel={"next"}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={booksConfig.marginPagesDisplayed}
+        pageRangeDisplayed={booksConfig.pageRangeDisplayed}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
+      />
     </div>
   )
 }

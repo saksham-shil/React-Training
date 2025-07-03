@@ -1,19 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import BooksList from './components/BooksList';
 import StudentDetails from './components/StudentDetails';
 import StudentsList from './components/StudentsList';
 import { useState } from 'react'
+import students from './data/studentsList.json'
+import books from './data/bookslist.json'
 
 
 function App() {
-  const students = [
-    { "id":1, "title": "VIPUL", "age": 21 },
-    { "id":2, "title": "SHISPAL", "age": 20 },
-    { "id":3, "title": "RACHIT", "age": 20 },
-    { "id":4, "title": "SUHEL", "age": 20 },
-    { "id":5, "title": "SACHIN", "age": 20 }
-  ];
 
   const [ student, setStudent] = useState(null);
 
@@ -26,7 +20,7 @@ function App() {
       <h1 className="mt-4">Library Management</h1>
       <div className="row mt-4">
         <div className="col-md-4">
-          <BooksList />
+          <BooksList books =  {books}/>
         </div>
         <div className="col-md-4">
           <StudentsList students = {students} onClickStudent={StudentClick}/>
