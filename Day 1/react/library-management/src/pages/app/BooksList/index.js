@@ -1,13 +1,21 @@
 import React, { useState } from 'react'
-import PAGINATIONCONFIG from '../../config/PAGINATIONCONFIG'
-import ReactPaginate from 'react-paginate'
+import ReactPaginate from 'react-paginate';
+import PAGINATIONCONFIG from '../../../constants/paginationConfig';
+import initialBooks from '../../../constants/bookslist.json'
+import BookForm from '../../../components/BookForm';
 
-const BooksList = ({books}) => {
-
+const BooksList = () => {
   const[curPage, setCurPage] = useState (0);
+  const [show, setShow] = useState(true);
+  const [books, setBooks] = useState (initialBooks);
+
 
   const handlePageClick = (selectedPage) => {
     setCurPage(selectedPage.selected)
+  }
+
+  const handleBookAdd = (newBook) => {
+    setBooks([...books, newBook])
   }
 
   const itemsPerPage = PAGINATIONCONFIG.ITEMSPERPAGE;
@@ -15,7 +23,6 @@ const BooksList = ({books}) => {
   const curBooks = books.slice(start, start + itemsPerPage);
   const pageCount = Math.ceil (books.length/itemsPerPage);
 
-  const [show, setShow] = useState(false);
 
   const handleClickShow = () => {
     setShow(show ? false : true);
@@ -23,7 +30,11 @@ const BooksList = ({books}) => {
 
   return (
     
-    <div>
+    <div className = "container">
+      <h1> Books List </h1>
+
+      <BookForm onBookAdd = {handleBookAdd} />
+
       <button type="button" class="btn btn-primary" onClick={() => handleClickShow()} > {show ? "Hide" : "Show"} </button>
       <table className="table-style"> 
         <tr>
