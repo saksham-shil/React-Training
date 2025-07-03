@@ -1,7 +1,7 @@
 import './App.css';
-import BooksList from './components/BooksList';
-import StudentDetails from './components/StudentDetails';
-import StudentsList from './components/StudentsList';
+import BooksList from './components/BooksList/index';
+import StudentDetails from './components/StudentsDetails/index';
+import StudentsList from './components/StudentsList/index';
 import { useState } from 'react'
 import students from './data/studentsList.json'
 import books from './data/bookslist.json'
