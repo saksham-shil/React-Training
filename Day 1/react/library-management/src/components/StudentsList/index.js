@@ -30,14 +30,17 @@ const [show, setShow] = useState(false);
         <th>Student Name</th>
         <th>Student Age</th>
       </tr>
-      {show === false 
-      ? <tr><td colSpan={3} className="text-center"> <strong> Table is hidden </strong> </td></tr>
-      : curStudents?.map(student => (
-        <tr key = {student.id} onClick={() => onClickStudent(student)}>
-          <td>{student.id}</td>
-          <td>{student.title}</td>
-          <td>{student.age}</td>
-        </tr>
+      {show === false && <tr><td colSpan={3} className="text-center"> <strong> Table is hidden </strong> </td></tr>}
+
+      {show && curStudents.length === 0 && <tr><td colSpan={3} className="text-center"><strong> No data is found </strong> </td></tr>}
+
+      {show && 
+        curStudents?.map(student => (
+            <tr key = {student.id} onClick={() => onClickStudent(student)}>
+              <td> {student.id} </td>
+              <td> {student.title} </td>
+              <td> {student.age} </td>
+            </tr>
       ))}
       </table>
 

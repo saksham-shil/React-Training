@@ -31,7 +31,19 @@ const BooksList = ({books}) => {
           <th> Book Name </th>
           <th> Author </th>
         </tr>
-        {show === false 
+        {show === false && <tr><td colSpan={3} className="text-center"> <strong> Table is hidden </strong> </td></tr>}
+
+        {show && curBooks.length === 0 && <tr><td colSpan={3} className="text-center"><strong> No data is found </strong> </td></tr>}
+
+        {show && 
+        curBooks?.map(book => (
+            <tr key = {book.id}>
+              <td> {book.id} </td>
+              <td> {book.title} </td>
+              <td> {book.author} </td>
+            </tr>
+          ))}
+        {/* {show === false 
           ? <tr><td colSpan={3} className="text-center"> <strong> Table is hidden </strong> </td></tr>
           : curBooks?.map(book => (
             <tr key = {book.id}>
@@ -39,7 +51,7 @@ const BooksList = ({books}) => {
               <td> {book.title} </td>
               <td> {book.author} </td>
             </tr>
-          ))}
+          ))}  */}
       </table>
 
       <ReactPaginate

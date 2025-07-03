@@ -3,8 +3,8 @@ import BooksList from './components/BooksList/index';
 import StudentDetails from './components/StudentsDetails/index';
 import StudentsList from './components/StudentsList/index';
 import { useState } from 'react'
-import students from './data/studentsList.json'
-import books from './data/bookslist.json'
+import students from './constants/studentsList.json'
+import books from './constants/bookslist.json'
 
 
 function App() {
