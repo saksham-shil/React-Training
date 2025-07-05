@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactPaginate from 'react-paginate';
 import PAGINATIONCONFIG from '../../../constants/paginationConfig';
-import initialBooks from '../../../constants/bookslist.json'
+import initialBooks from '../../../data/bookslist.json'
 import BookForm from '../../../components/BookForm';
 
 const BooksList = () => {
@@ -15,10 +15,10 @@ const BooksList = () => {
   }
 
   const handleBookAdd = (newBook) => {
-    setBooks([...books, newBook])
+    setBooks([newBook, ...books])
   }
 
-  const itemsPerPage = PAGINATIONCONFIG.ITEMSPERPAGE;
+  const itemsPerPage = PAGINATIONCONFIG.itemsPerPage;
   const start = curPage * itemsPerPage;
   const curBooks = books.slice(start, start + itemsPerPage);
   const pageCount = Math.ceil (books.length/itemsPerPage);
@@ -31,17 +31,20 @@ const BooksList = () => {
   return (
     
     <div className = "container">
+      
+      <BookForm onBookAdd = {handleBookAdd} />
       <h1> Books List </h1>
 
-      <BookForm onBookAdd = {handleBookAdd} />
-
-      <button type="button" class="btn btn-primary" onClick={() => handleClickShow()} > {show ? "Hide" : "Show"} </button>
+      <button type="button" className="btn btn-primary" onClick={() => handleClickShow()} > {show ? "Hide List" : "Show List"} </button>
       <table className="table-style"> 
+        <thead>
         <tr>
-          <th> Book ID</th>
-          <th> Book Name </th>
-          <th> Author </th>
-        </tr>
+            <th> Book ID</th>
+            <th> Book Name </th>
+            <th> Author </th>
+          </tr>
+        </thead>
+        <tbody>
         {show === false && <tr><td colSpan={3} className="text-center"> <strong> Table is hidden </strong> </td></tr>}
 
         {show && curBooks.length === 0 && <tr><td colSpan={3} className="text-center"><strong> No data is found </strong> </td></tr>}
@@ -63,6 +66,7 @@ const BooksList = () => {
               <td> {book.author} </td>
             </tr>
           ))}  */}
+        </tbody>  
       </table>
 
       <ReactPaginate
@@ -70,8 +74,8 @@ const BooksList = () => {
         nextLabel={"next"}
         breakLabel={"..."}
         pageCount={pageCount}
-        marginPagesDisplayed={PAGINATIONCONFIG.MARGINPAGESDISPLAYED}
-        pageRangeDisplayed={PAGINATIONCONFIG.PAGERANGESDISPLAYED}
+        marginPagesDisplayed={PAGINATIONCONFIG.marginPagesDisplayed}
+        pageRangeDisplayed={PAGINATIONCONFIG.pageRangeDisplayed}
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
         pageClassName={"page-item"}

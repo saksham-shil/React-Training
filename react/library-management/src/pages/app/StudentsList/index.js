@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import PAGINATIONCONFIG  from '../../../constants/paginationConfig';
-import students from '../../../constants/studentsList.json'
+import students from '../../../data/studentsList.json'
 import { Link, Outlet } from 'react-router-dom';
 
 const StudentsList = () => {
@@ -14,7 +14,7 @@ const StudentsList = () => {
     setCurPage(selectedPage.selected);
   }
 
-  const itemsPerPage = PAGINATIONCONFIG.ITEMSPERPAGE
+  const itemsPerPage = PAGINATIONCONFIG.itemsPerPage
   const start = curPage * itemsPerPage;
   const curStudents = students.slice (start, start + itemsPerPage);
   const pageCount = Math.ceil (students.length/itemsPerPage);
@@ -28,7 +28,7 @@ const StudentsList = () => {
     
     <div>
       <h1> Students List </h1>
-      <button type="button" class="btn btn-primary" onClick={() => handleClickShow()} > {show ? "Hide" : "Show"} </button>
+      <button type="button" className="btn btn-primary" onClick={() => handleClickShow()} > {show ? "Hide" : "Show"} </button>
       <table className="table-style"> 
       <tr>
         <th>Student ID</th>
@@ -56,8 +56,8 @@ const StudentsList = () => {
         nextLabel={"next"}
         breakLabel={"..."}
         pageCount={pageCount}
-        marginPagesDisplayed={PAGINATIONCONFIG.MARGINPAGESDISPLAYED}
-        pageRangeDisplayed={PAGINATIONCONFIG.PAGERANGESDISPLAYED}
+        marginPagesDisplayed={PAGINATIONCONFIG.marginPagesDisplayed}
+        pageRangeDisplayed={PAGINATIONCONFIG.pageRangeDisplayed}
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
         pageClassName={"page-item"}

@@ -2,11 +2,11 @@ import React from 'react'
 
 
 const PAGINATIONCONFIG = {
-  ITEMSPERPAGE: 10,
+  itemsPerPage: 10,
 
-  MARGINPAGESDISPLAYED : 1,
+  marginPagesDisplayed : 1,
 
-  PAGERANGESDISPLAYED : 3,
+  pageRangeDisplayed : 3,
 };
 
 export default PAGINATIONCONFIG;

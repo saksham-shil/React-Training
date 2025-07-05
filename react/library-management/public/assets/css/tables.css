@@ -1,0 +1,26 @@
+.table-style {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-family: sans-serif;
+}
+
+.table-style th,
+.table-style td {
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.table-style thead th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table-style tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.table-style tbody tr:hover {
+  background-color: #eaeaea;
+}

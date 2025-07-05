@@ -1,6 +1,6 @@
 
 import React from 'react';
-import students from '../../../constants/studentsList.json'
+import students from '../../../data/studentsList.json'
 import { useParams } from 'react-router-dom';
 
 const StudentDetails = () => {

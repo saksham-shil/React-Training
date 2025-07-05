@@ -1,0 +1,11 @@
+
+.student-details {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.student-details h2 {
+  margin-top: 0;
+}
