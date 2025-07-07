@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import ReactPaginate from 'react-paginate';
 import PAGINATIONCONFIG from '../../../constants/paginationConfig';
-import initialBooks from '../../../data/bookslist.json'
+// import initialBooks from '../../../data/bookslist.json'
 import BookForm from '../../../components/BookForm';
+import { useSelector } from 'react-redux';
+
+
 
 const BooksList = () => {
   const[curPage, setCurPage] = useState (0);
   const [show, setShow] = useState(true);
-  const [books, setBooks] = useState (initialBooks);
-
+  // const [books, setBooks] = useState (initialBooks);
+  const books = useSelector(state => state.books)
 
   const handlePageClick = (selectedPage) => {
     setCurPage(selectedPage.selected)
   }
 
-  const handleBookAdd = (newBook) => {
-    setBooks([newBook, ...books])
-  }
+  // const handleBookAdd = (newBook) => {
+  //   setBooks([newBook, ...books])
+  // }
 
   const itemsPerPage = PAGINATIONCONFIG.itemsPerPage;
   const start = curPage * itemsPerPage;
@@ -32,7 +35,7 @@ const BooksList = () => {
     
     <div className = "container">
       
-      <BookForm onBookAdd = {handleBookAdd} />
+      <BookForm/>
       <h1> Books List </h1>
 
       <button type="button" className="btn btn-primary" onClick={() => handleClickShow()} > {show ? "Hide List" : "Show List"} </button>

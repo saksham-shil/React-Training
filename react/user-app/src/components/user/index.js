@@ -3,20 +3,22 @@ import { useRef } from 'react'
 
 const User = () => {
 
-    const email = useRef('');
-    const password = useRef('');
+    const email = useRef(null);
+    const password = useRef(null);
+    const formRef = useRef(null);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        email.current.value='';
-        password.current.value='';
+        console.log(email.current.value);   
+        console.log(password.current.value);
+        formRef.current.reset();
     }
 
 
   return (
     <>
         <div>
-            <form onSubmit= {handleSubmit}>
+            <form onSubmit= {handleSubmit} ref= {formRef}>
                 <div>
                 <label> <b>Email</b> </label>
                 <input type='email' name='email' required ref = {email}></input>
@@ -28,7 +30,6 @@ const User = () => {
                 </div>
             </form>
 
-            <p> {email.current.value} - {password.current.value} </p>
         </div>
     </>
   )
