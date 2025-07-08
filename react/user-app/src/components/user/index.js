@@ -20,10 +20,10 @@ const User = () => {
         <div>
             <form onSubmit= {handleSubmit} ref= {formRef}>
                 <div>
-                <label> <b>Email</b> </label>
-                <input type='email' name='email' required ref = {email}></input>
-                <label> <b>Password</b> </label>
-                <input type='password' name='password' required ref = {password}></input>
+                <label htmlFor='email'> <b>Email</b> </label>
+                <input id = 'email' type='email' name='email' required ref = {email}></input>
+                <label htmlFor='password'> <b>Password</b> </label>
+                <input id = 'password' type='password' name='password' required ref = {password}></input>
                 </div>
                 <div>
                     <button type='submit' className='btn btn-success'>Submit</button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import {useDispatch} from 'react-redux'
-import {addBook} from '../../redux/slices/booksSlice'
+import {addBook} from '../../redux/reducers/books'
 
 const reducer = (state, action) => {
   switch (action.type) {

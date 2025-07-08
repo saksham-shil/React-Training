@@ -11,7 +11,7 @@ const BooksList = () => {
   const[curPage, setCurPage] = useState (0);
   const [show, setShow] = useState(true);
   // const [books, setBooks] = useState (initialBooks);
-  const books = useSelector(state => state.books)
+  const books = useSelector(state => state.books.books)
 
   const handlePageClick = (selectedPage) => {
     setCurPage(selectedPage.selected)
