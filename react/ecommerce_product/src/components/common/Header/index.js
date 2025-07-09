@@ -5,7 +5,6 @@ const Header = () => {
     <>
      <div id="header_mobile_inner_ct" className="d-mbl"></div>
       <div id="header" className="d-dsk"></div>
-      <div className="clearfix"></div> 
     </>
   )
 }

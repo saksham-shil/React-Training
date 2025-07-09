@@ -1302,11 +1302,16 @@ h6.primary-address-heading{
     width: 78px;
     border-radius: 4px;
 }
-.product-desc .size-button li button.btn-bordered-grey:hover{
+
+.product-desc .size-button li button.btn-bordered-grey.active {
     background: #000;
     color: #fff;
 }
-.product-desc .size-button li button.disabled{
+
+.product-desc .size-button li button.btn-bordered-grey:hover{
+    background: #000;
+    color: #fff;
+}.product-desc .size-button li button.disabled{
 	position: relative;
 }
 .product-desc .size-button li button.disabled:before{
