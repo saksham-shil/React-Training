@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const AdditionalInfo = ({info, description}) => {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? -1 : index);
