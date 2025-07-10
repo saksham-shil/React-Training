@@ -59,7 +59,10 @@ const AddToCart = ({product}) => {
       .post('appAddToCart?version=1.11&__store=default', bodyFormData)
       .then(response => {
         console.log('Add to cart response:', response.data);
-        alert('Product added to cart!');
+        if (response.data.status === 'success')
+          alert(`${response.data.message}\nTotal Items in Cart : ${response.data.total_cart_items}`);
+        else 
+          alert ("This functionality failed, try again!")
       })
       .catch(err => {
         console.error('Failed to add to cart:', err);
