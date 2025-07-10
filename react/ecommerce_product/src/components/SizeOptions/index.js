@@ -33,8 +33,7 @@ const SizeOptions = ({ options }) => {
       </div>
 
       <ul className="size-button mt-10" id="main-size">
-        {option.items.map((item, index) => (
-          <li key={index}>
+         {option?.items.map((item, index) => (          <li key={index}>
             <button
               onClick={() => handleSelect(item)}
               className={`btn-bordered-grey ${selectedSize?.id == item.id ? 'active' : ''}`}

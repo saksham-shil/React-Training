@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import axiosInstance from '../../services/axiosInstance'
+import axiosInstance from '../../services/axiosInstance';
 
-const AddToCart = ({product}) => {
-   const {selectedSize} = useSelector(state => state.selectedSize);
+const AddToCart = ({ product }) => {
+  const { selectedSize } = useSelector(state => state.selectedSize);
+  const [loading, setLoading] = useState(false);
 
   const handleAddToCart = () => {
     if (!selectedSize) {
       alert('Please select a size.');
       return;
     }
+
+    setLoading(true);
 
     const cartProducts = {
       request_type: 'add',
@@ -60,20 +63,36 @@ const AddToCart = ({product}) => {
       .then(response => {
         console.log('Add to cart response:', response.data);
         if (response.data.status === 'success')
-          alert(`${response.data.message}\nTotal Items in Cart : ${response.data.total_cart_items}`);
-        else 
-          alert ("This functionality failed, try again!")
+          alert(
+            `${response.data.message}\nTotal Items in Cart : ${response.data.total_cart_items}`
+          );
+        else alert('This functionality failed, try again!');
       })
       .catch(err => {
         console.error('Failed to add to cart:', err);
         alert('Failed to add product to cart.');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
     <div className="add-to-cart-btn mt-20">
-      <button className="btn-primary" onClick={handleAddToCart}>ADD TO BAG</button>
-      <button className="btn-blank"><img src="assets/images/icons/wishlist.svg" className="img-fluid mx-auto d-block" alt="wishlist" /></button>
+      <button
+        className="btn-primary"
+        onClick={handleAddToCart}
+        disabled={loading}
+      >
+        {loading ? 'ADDING...' : 'ADD TO BAG'}
+      </button>
+      <button className="btn-blank">
+        <img
+          src="assets/images/icons/wishlist.svg"
+          className="img-fluid mx-auto d-block"
+          alt="wishlist"
+        />
+      </button>
     </div>
   );
 };

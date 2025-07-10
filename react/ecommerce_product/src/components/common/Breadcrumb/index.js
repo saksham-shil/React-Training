@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({ items }) => {
   return (
@@ -8,10 +9,9 @@ const Breadcrumb = ({ items }) => {
           <div className="col-md-12">
             <div className="breadcrumb">
               <ul>
-                {items.map((item, index) => (
-                  <li key={index}>
+                 {items?.map((item, index) => (                  <li key={index}>
                     {item.last === '1' ? (item.label) 
-                    : (<a href={item.link}>{item.label}</a>)}
+                    : (<Link to={item.link}>{item.label}</Link>)}
                   </li>
                 ))}
               </ul>

@@ -33,8 +33,7 @@ const ProductImages = ({ images = [] }) => {
       <div className="row">
         <div className="col-md-12">
           <div className="product-image-thumbnails" style={{ marginTop: '1rem' }}>
-            {images.map((image, index) => (
-              <img
+             {images?.map((image, index) => (              <img
                 key={index}
                 src={image.src}
                 style={{width: '80px',height: '80px'}}

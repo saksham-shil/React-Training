@@ -18,8 +18,7 @@ const AdditionalInfo = ({info, description}) => {
 
   return (
     <div className="accordion mt-30" id="accordionExample">
-      {accordionItems.map((item, index) => (
-        <div className="accordion-item" key={item.name}>
+       {accordionItems?.map((item, index) => (        <div className="accordion-item" key={item.name}>
           <h2 className="accordion-header" id={`heading${index}`}>
             <button
               className={`accordion-button ${openIndex !== index ? 'collapsed' : ''}`}

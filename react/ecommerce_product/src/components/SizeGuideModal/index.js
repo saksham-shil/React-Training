@@ -111,16 +111,13 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                       <table className="table text-center">
                         <thead>
                           <tr>
-                            {size.row_header_text.map((item, index) => (
-                              <th key = {index}>{item}</th>
+                             {size?.row_header_text.map((item, index) => (                              <th key = {index}>{item}</th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
-                          {size.row_data.map((item, index) => (
-                            <tr key = {index}>
-                              {item.map((item2, index2) => (
-                                <td key = {index}>{item2}</td>
+                           {size?.row_data.map((item, index) => (                            <tr key = {index}>
+                               {item?.map((item2, index2) => (                                <td key = {index}>{item2}</td>
                               ))}
                             </tr>
                           ))}
