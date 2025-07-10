@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import axiosInstance from '../../services/axiosInstance';
 
 const SizeGuideModal = ({ isOpen, onClose }) => {
   const [isFullGuideOpen, setFullGuide] = useState(false);
-
-  if (!isOpen) return null;
+  const [size, setSize] = useState();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true)
 
   const handleViewFullGuide = () => {
     setFullGuide(true);
@@ -19,6 +21,50 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  useEffect(() => {
+    const postData = {
+      id_currency: 'INR',
+      iso_code: '1',
+      email: '',
+      platform: 'web',
+      device_is_mobile: false,
+      product_id: '2539205',
+    };
+
+    const bodyFormData = new FormData();
+    for (const key in postData) {
+      bodyFormData.append(key, postData[key]);
+    }
+
+    axiosInstance
+      .post('appGetSizeChart?version=1.11&__store=default', bodyFormData)
+      .then(response => {
+        console.log(response);
+        setSize(response.data);
+      })
+      .catch(err => {
+        setError('Failed to fetch product details.');
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (!isOpen) return null;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!size) {
+    return <div>size not found.</div>;
+  }
+
   return ReactDOM.createPortal(
     <>
       {!isFullGuideOpen && (
@@ -26,7 +72,7 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
           <div className="bg"></div>
           <div className="center-box">
             <div className="newsletter-heading">
-              <h3>SIZE GUIDE</h3>
+              <h3>{size.title_text}</h3>
               <button onClick={handleClose} className="btn-blank">
                 <img
                   src="assets/images/icons/Cross-Button.png"
@@ -40,12 +86,12 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                 <div className="row">
                   <div className="col-12">
                     <div className="heading bg-light mt-20">
-                      <h4 className="text-black">Men's Clothing Top Wear</h4>
+                      <h4 className="text-black">{size.subtitle_text}</h4>
                     </div>
                   </div>
                   <div className="col-md-5 col-5 mt-25">
                     <img
-                      src="assets/images/product_image.png"
+                      src={size.product_details.image_src}
                       className="img-fluid mx-auto d-block"
                       alt=""
                     />
@@ -53,9 +99,9 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                   <div className="col-md-7 col-7 mt-25">
                     <div className="text">
                       <h5 className="text-black text-left">
-                        Versache Collection
+                        {size.product_details.designer_name}
                       </h5>
-                      <p className="text-left">Orange graphic print polo</p>
+                      <p className="text-left">{size.product_details.name}</p>
                     </div>
                   </div>
                 </div>
@@ -65,14 +111,20 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                       <table className="table text-center">
                         <thead>
                           <tr>
-                            <th>Standard</th>
-                            <th>IT Size</th>
-                            <th>Collar Size (IN)</th>
-                            <th>UK/US/IN</th>
+                            {size.row_header_text.map((item, index) => (
+                              <th key = {index}>{item}</th>
+                            ))}
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          {size.row_data.map((item, index) => (
+                            <tr key = {index}>
+                              {item.map((item2, index2) => (
+                                <td key = {index}>{item2}</td>
+                              ))}
+                            </tr>
+                          ))}
+                          {/* <tr>
                             <td>XXS</td>
                             <td>42</td>
                             <td>12-12.5</td>
@@ -119,7 +171,7 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                             <td>56</td>
                             <td>19-19.5</td>
                             <td>46,47</td>
-                          </tr>
+                          </tr> */}
                         </tbody>
                       </table>
                     </div>
@@ -187,8 +239,7 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                   <div className="col-md-8 mx-auto">
                     <div className="disclaimer-text">
                       <p className="text-black">
-                        *Please note the measurements may vary according to
-                        different brand and styles.
+                        {size.help_subtitle_text}
                       </p>
                     </div>
                   </div>
@@ -574,8 +625,7 @@ const SizeGuideModal = ({ isOpen, onClose }) => {
                 <div className="col-md-8 mx-auto">
                   <div className="disclaimer-text">
                     <p className="text-black">
-                      *Please note the measurements may vary according to
-                      different brand and styles.
+                      {size.help_subtitle_text}
                     </p>
                   </div>
                 </div>

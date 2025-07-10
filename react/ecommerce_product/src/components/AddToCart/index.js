@@ -33,7 +33,7 @@ const AddToCart = ({product}) => {
           ],
           custom_options: [],
           quantity: 1,
-          product_id: product.id_product,
+          product_id: '2539205',
           minimal_quantity: 0,
         },
       ],
