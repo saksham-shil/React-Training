@@ -18,7 +18,7 @@ const ProductPage = () => {
       email: '',
       platform: 'web',
       device_is_mobile: false,
-      product_id: '',
+      product_id: '2539205',
       product_url: 'green-embroidered-logo-polo-2539205',
     };
 

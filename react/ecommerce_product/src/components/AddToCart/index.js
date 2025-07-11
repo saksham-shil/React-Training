@@ -41,7 +41,6 @@ const AddToCart = ({ product }) => {
         },
       ],
       customization_details: [],
-      session_id: localStorage.getItem('SID'),
     };
 
     const postData = {
